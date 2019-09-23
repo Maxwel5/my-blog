@@ -1,7 +1,7 @@
-from flask import render_template
+from flask import render_template, redirect,url_for
 from . import main
 # from flask_login import login_required
-from ..models import User
+from ..models import Blog
 from .forms import NewblogForm
 from .. import db
 
@@ -13,11 +13,11 @@ def index():
     return render_template('index.html',message = message)
 
 @main.route('/newblog',methods = ["GET","POST"])
-def register():
+def newblog():
     form = NewblogForm()
     if form.validate_on_submit():
-        user = User(title = form.title.data, blog = form.blog.data,author = form.author.data)
-        db.session.add(user)
+        blog = Blog (title = form.title.data, blog = form.blog.data,author = form.author.data)
+        db.session.add(blog)
         db.session.commit()
-        return redirect(url_for('main.login'))
-    return render_template('main/newblog.html',newblog_form = form)
+        return redirect(url_for('main.index'))
+    return render_template('newblog.html',form = form)

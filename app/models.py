@@ -1,8 +1,8 @@
 from . import db
 from . import login_manager
 
-class User(db.Model):
-    __tablename__="users"
+class Blog(db.Model):
+    __tablename__="blogs"
     
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50))
