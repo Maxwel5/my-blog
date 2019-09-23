@@ -1,6 +1,6 @@
 from flask import render_template, redirect,url_for
 from . import main
-# from flask_login import login_required
+from flask_login import login_required
 from ..models import Blog
 from .forms import NewblogForm
 from .. import db
@@ -21,3 +21,7 @@ def newblog():
         db.session.commit()
         return redirect(url_for('main.index'))
     return render_template('newblog.html',form = form)
+
+@main.route('/post/review/new/<int:id>', methods = ['GET','POST'])
+@login_required
+def new_review(id):
