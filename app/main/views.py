@@ -9,7 +9,7 @@ from .. import db
 @main.route('/')
 def index():
 
-    message = 'Fine Blog'
+    title = 'Home - Fine Blog'
     return render_template('index.html',message = message)
 
 @main.route('/newblog',methods = ["GET","POST"])
