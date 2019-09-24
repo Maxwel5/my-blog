@@ -2,4 +2,20 @@
 
 {% block content %}
 {{super()}}
+<div class="container" style="text-align:center; background-color:orange">
+    <h1>Fine Blog</h1>
+</div>
 {% endblock %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="card">
+                <h2>Blog 1</h2>
+                <h3>The most interesting experince in the world is to get involved by practically doing all you think that is possible.</h3>
+                <h5>By: Facts O</h5>
+                <a href="{{url_for('main.blog 1')}}" class="btn btn-secondary -center">View</a>
+            </div>
+        </div>
+    </div>
+</div>
