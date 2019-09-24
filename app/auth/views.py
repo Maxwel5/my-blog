@@ -1,9 +1,14 @@
 from flask import render_template,redirect,url_for,flash,request
+from ..models import User
 from flask_login import login_user,logout_user,login_required
 from . import auth
-from ..models import User
+from app.models import User
 from .forms import RegistrationForm,LoginForm
 from .. import db
+
+@auth.route('/home')
+def home():
+    return render_template('index.html')
 
 @auth.route('/login')
 def login():

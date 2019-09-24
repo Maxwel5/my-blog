@@ -20,8 +20,4 @@ def newblog():
         db.session.add(blog)
         db.session.commit()
         return redirect(url_for('main.index'))
-    return render_template('newblog.html',form = form)
-
-@main.route('/post/review/new/<int:id>', methods = ['GET','POST'])
-@login_required
-def new_review(id):
+    return render_template('newblog.html',form = form,title=title)
