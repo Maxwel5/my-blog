@@ -10,21 +10,25 @@
     <div class="row">
         <div class="col-md-8">
             <div class="Jumbotron">
-                <div class="card">
-                    <h2>Education</h2>
-                    <h3>The most interesting experince in the world is to get involved by practically doing all you think that is possible.</h3>
-                    <h5>By: Facts O</h5>
-                    <a href="#" class="btn btn-secondary -center">View</a>
+                {% if current_user.is_authenticated %}
+                <a href="{{url_for('main.newblog')}}" class="btn btn-info btn-sm mb-3">Add Post</a>
+                {% endif %}
+                {% for blog in blogs %}
+                <div class="card" style="margin-bottom: 20px">
+                    <div class="card-header">
+                        {{blog.title}}
+                    </div>
+                    <div class="card-body">
+                        <p>{{blog.blog}}</p>
+                        <h5>By: {{blog.user.username}}</h5>
+                        <a class="btn btn-success btn-sm" href="{{url_for('main.newcomment', blog_id = blog.id)}}">Comment</a>
+                        {% if current_user.is_authenticated %}
+                        <a class="btn btn-info btn-sm" href="">Edit</a>
+                        <a class="btn btn-danger btn-sm" href="">Delete</a>
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="card">
-                    <h2>Nature</h2>
-                    <h3>The attracting scenaries in the world is to have leisure in enjoying watching wildlife, discoveries and folloeing up with great intervensions.</h3>
-                    <h5>By: Max Y</h5>
-                    <a href="#" class="btn btn-secondary -center">View</a>
-                </div><br>
-                <div class="container" style="padding-bottom: 20px;">
-                    <a href="#" class="btn btn-success">Add post</a>
-                </div>
+                {% endfor %}
             </div>
         </div>
         <div class="col-md-4">
