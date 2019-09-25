@@ -4,15 +4,15 @@ from flask_login import login_user,logout_user,login_required
 from . import auth
 from app.models import User
 from .forms import RegistrationForm,LoginForm
+from app.request import getQuotes
 from .. import db
+
 
 @auth.route('/home')
 def home():
-    return render_template('index.html')
+    quote = getQuotes()
+    return render_template('index.html',quote = quote)
 
-@auth.route('/login')
-def login():
-    return render_template('auth/login.html')
 
 @auth.route('/register',methods = ["GET","POST"])
 def register():

@@ -1,5 +1,4 @@
 import requests
-from config import Config
 from .models import Quotes
 
 new_quotes_url = 'http://quotes.stormconsultancy.co.uk/random.json'
@@ -11,4 +10,5 @@ def getQuotes():
    quote = new_quote.get("quote")
    permalink = new_quote.get("permalink")
    quote_all = Quotes(author,quote,permalink)
+   print(quote_all)
    return quote_all

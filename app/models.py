@@ -10,6 +10,8 @@ class Blog(db.Model):
     blog = db.Column(db.String(120))
     author = db.Column(db.String(80))
 
+    comments = db.relationship('Comment',backref =  'pitch_id',lazy = "dynamic")
+    
     def __repr__(self):
         return f'User {self.title, blog, author}'
 
@@ -55,19 +57,6 @@ class Role(db.Model):
 
     def __repr__(self):
         return f'User {self.name}'
-
-class Pitch(db.Model):
-    __tablename__ = 'pitches'
-
-    id = db.Column(db.Integer,primary_key = True)
-    pitch_title = db.Column(db.String(255))
-    pitch_content = db.Column(db.String(800))
-    category = db.Column(db.String(255))
-    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
-    upvote = db.Column(db.Integer)
-    downvote = db.Column(db.Integer)
-
-    comments = db.relationship('Comment',backref =  'pitch_id',lazy = "dynamic")
 
 class Quotes:
  def __init__ (self,author,quote,permalink):

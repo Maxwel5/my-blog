@@ -14,16 +14,16 @@
                     <h2>Education</h2>
                     <h3>The most interesting experince in the world is to get involved by practically doing all you think that is possible.</h3>
                     <h5>By: Facts O</h5>
-                    <a href="{{url_for('main.education')}}" class="btn btn-secondary -center">View</a>
+                    <a href="#" class="btn btn-secondary -center">View</a>
                 </div>
                 <div class="card">
                     <h2>Nature</h2>
                     <h3>The attracting scenaries in the world is to have leisure in enjoying watching wildlife, discoveries and folloeing up with great intervensions.</h3>
                     <h5>By: Max Y</h5>
-                    <a href="{{url_for('main.nature')}}" class="btn btn-secondary -center">View</a>
+                    <a href="#" class="btn btn-secondary -center">View</a>
                 </div><br>
                 <div class="container" style="padding-bottom: 20px;">
-                    <a href="{{url_for('main.new_post')}}" class="btn btn-success">Add post</a>
+                    <a href="#" class="btn btn-success">Add post</a>
                 </div>
             </div>
         </div>
@@ -34,9 +34,18 @@
                 <p>Nature</p>
                 <p>Farming</p>
                 <p>etc</p>
-                <a href="{{url_for('main.post titles')}}" class="btn btn-secondary -center">Search</a>
+                <a href="#" class="btn btn-secondary -center">Search</a>
             </div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <p>{{quote.quote}}</p>
+            <p>{{quote.author}}</p>
+            <a href="{{quote.permalink}}">view</a>
+        </div>
+        <div class="col-md-4"></div>
     </div>
 </div>
 {% endblock %}

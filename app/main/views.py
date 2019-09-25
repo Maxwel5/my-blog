@@ -4,13 +4,15 @@ from flask_login import login_required
 from ..models import Blog
 from .forms import NewblogForm
 from .. import db
+from app.request import getQuotes
 
 # Views
 @main.route('/')
 def index():
-
+    quote = getQuotes()
     title = 'Home - Fine Blog'
-    return render_template('index.html',message = message)
+    print(quote)
+    return render_template('index.html',title = title,quote = quote)
 
 @main.route('/newblog',methods = ["GET","POST"])
 def newblog():
@@ -20,4 +22,4 @@ def newblog():
         db.session.add(blog)
         db.session.commit()
         return redirect(url_for('main.index'))
-    return render_template('newblog.html',form = form,title=title)
+    return render_template('newblog.html',form = form)
