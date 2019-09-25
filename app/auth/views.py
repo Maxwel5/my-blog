@@ -13,7 +13,6 @@ def home():
     quote = getQuotes()
     return render_template('index.html',quote = quote)
 
-
 @auth.route('/register',methods = ["GET","POST"])
 def register():
     form = RegistrationForm()
