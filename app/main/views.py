@@ -24,6 +24,18 @@ def newblog():
         return redirect(url_for('main.index'))
     return render_template('newblog.html',form = form)
 
-@main.route('/pitch/<int:id>', methods = ['GET', 'POST'])
-def pitch(id):
-    pitch = Pitch.get_pitch(id)
+@main.route('/blog/<int:id>', methods = ['GET', 'POST'])
+def blog(id):
+    blog = Blog.get_post(id)
+    comment_form = CommentForm()
+    if comment_form.validate_on_submit():
+        comment = comment_form.blog.data
+
+        new_comment = Comment(comment = comment,user = current_user,blog_id = blog)
+
+        new_comment.save_comment()
+
+
+    comments = Comment.get_comments(blog)
+
+    return render_template("blog.html", blog=blog, comment_form=comment_form, comments=comments)
