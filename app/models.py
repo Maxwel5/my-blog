@@ -11,6 +11,7 @@ class User(db.Model,UserMixin):
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String)
     post = db.relationship('Blog', backref='user', lazy='dynamic')
+    comment = db.relationship('Comment', backref='user', lazy='dynamic')
     
 
     @property
@@ -40,23 +41,25 @@ class Blog(db.Model):
     title = db.Column(db.String(50))
     blog = db.Column(db.String(120))
     author_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    comment = db.relationship('Comment', backref='blog', lazy='dynamic')
 
+    def save_comments(self):
+        db.session.add(self)
+        db.session.commit()
 
-    
     def __repr__(self):
         return f'User {self.title, blog, author}'
 
+class Comment(db.Model):
+    __tablename__ = 'comments'
+    id = db.Column(db.Integer,primary_key=True)
+    comment = db.Column(db.Text,nullable = False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    blog_id = db.Column(db.Integer, db.ForeignKey('blogs.id'))
 
+    def save(self):
+        pass
 
-class Role(db.Model):
-    __tablename__ = 'roles'
-    id = db.Column(db.Integer,primary_key = True)
-    name = db.Column(db.String(255))
-    
-
-
-    def __repr__(self):
-        return f'User {self.name}'
 
 class Quotes:
  def __init__ (self,author,quote,permalink):
