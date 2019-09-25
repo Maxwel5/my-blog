@@ -23,3 +23,7 @@ def newblog():
         db.session.commit()
         return redirect(url_for('main.index'))
     return render_template('newblog.html',form = form)
+
+@main.route('/pitch/<int:id>', methods = ['GET', 'POST'])
+def pitch(id):
+    pitch = Pitch.get_pitch(id)

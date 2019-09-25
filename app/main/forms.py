@@ -9,3 +9,12 @@ class NewblogForm(FlaskForm):
     author = StringField('Author', validators=[DataRequired()])
     submit = SubmitField('Add Blog', validators=[DataRequired()])
 
+class CommentForm(FlaskForm):
+
+    blog = TextAreaField('Comment something',validators = [Required()])
+    submit = SubmitField('Post Comments')
+
+class UpdateProfile(FlaskForm):
+    bio = TextAreaField('Describe yourself.',validators = [Required()])
+    submit = SubmitField('Submit')
+
