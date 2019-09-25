@@ -13,15 +13,6 @@
 </div>
 <div class="col-md-2"></div>
 </div>
-<div class="col-md-3"></div>
-<div class="col-md-6">
-    <p>Comments</p>
-    <br>
-    {% if current_user.is_authenticated %}
-        {{ wtf.quick_form(comment_form) }}
-    {%endif%}
-</div>
-<div class="col-md-3"></div>
 </div>
 
 {% endblock%}

@@ -43,12 +43,12 @@ class Blog(db.Model):
     author_id = db.Column(db.Integer,db.ForeignKey('users.id'))
     comment = db.relationship('Comment', backref='blog', lazy='dynamic')
 
-    def save_comments(self):
+    def save(self):
         db.session.add(self)
         db.session.commit()
 
     def __repr__(self):
-        return f'User {self.title, blog, author}'
+        return f'User {self.title}'
 
 class Comment(db.Model):
     __tablename__ = 'comments'
