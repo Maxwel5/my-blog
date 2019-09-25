@@ -13,6 +13,7 @@ def index():
     title = 'Home - Fine Blog'
     print(quote)
     blogs = Blog.query.all()
+    blogs = blogs[::-1]
     return render_template('index.html',title = title,quote = quote,blogs=blogs)
 
 @main.route('/newblog',methods = ["GET","POST"])
@@ -22,6 +23,7 @@ def newblog():
     if form.validate_on_submit():
         blog = Blog (title = form.title.data, blog = form.blog.data,author_id = current_user._get_current_object().id)
         blog.save()
+        flash('Post created succesfully')
         return redirect(url_for('main.index'))
     return render_template('newblog.html',form = form)
 
@@ -53,7 +55,7 @@ def deleteblog(blog_id):
     db.session.commit()
     flash('Deleted Succesfully')
     return redirect(url_for('main.index'))
-    
+
 @main.route('/newcomment/<blog_id>',methods = ["GET","POST"])
 @login_required
 def newcomment(blog_id):

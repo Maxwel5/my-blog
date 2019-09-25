@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{{super()}}
-<div class="page-header" style="text-align:center; background-color:orange">
+{% block style %}   
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">     
+{% endblock %}
+<div class="page-header" style="text-align:center">
     <h1>Fine Blog</h1>
 </div>
 
@@ -10,6 +12,12 @@
     <div class="row">
         <div class="col-md-8">
             <div class="Jumbotron">
+                {% for message in get_flashed_messages() %}
+                <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message }}
+                </div>
+                {% endfor %}
                 {% if current_user.is_authenticated %}
                 <a href="{{url_for('main.newblog')}}" class="btn btn-info btn-sm mb-3">Add Post</a>
                 {% endif %}
