@@ -1,4 +1,4 @@
-from flask import render_template, redirect,url_for,request
+from flask import render_template, redirect,url_for,request,flash
 from . import main
 from flask_login import login_required,current_user
 from ..models import Blog,Comment
@@ -43,6 +43,17 @@ def edit_blog(blog_id):
         form.blog.data = blog.blog
     return render_template ('newblog.html',form = form)
 
+@main.route('/blog/<blog_id>/delete',methods = ["GET","POST"])
+@login_required
+def deleteblog(blog_id):
+    blog = Blog.query.get(blog_id)
+    if current_user != blog.user:
+        return redirect(url_for('main.index'))
+    db.session.delete(blog)
+    db.session.commit()
+    flash('Deleted Succesfully')
+    return redirect(url_for('main.index'))
+    
 @main.route('/newcomment/<blog_id>',methods = ["GET","POST"])
 @login_required
 def newcomment(blog_id):
