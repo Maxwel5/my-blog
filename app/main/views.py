@@ -1,4 +1,4 @@
-from flask import render_template, redirect,url_for
+from flask import render_template, redirect,url_for,request
 from . import main
 from flask_login import login_required,current_user
 from ..models import Blog,Comment
@@ -24,6 +24,24 @@ def newblog():
         blog.save()
         return redirect(url_for('main.index'))
     return render_template('newblog.html',form = form)
+
+
+@main.route('/edit_blog/<blog_id>/edit',methods = ["GET","POST"])
+@login_required
+def edit_blog(blog_id):
+    form = NewblogForm()
+    blog = Blog.query.get(blog_id)
+    if current_user != blog.user:
+        return redirect(url_for('main.index'))
+    if form.validate_on_submit():
+        blog.title = form.title.data
+        blog.blog = form.blog.data
+        db.session.commit()
+        return redirect(url_for('main.index'))
+    if request.method == 'GET':
+        form.title.data = blog.title
+        form.blog.data = blog.blog
+    return render_template ('newblog.html',form = form)
 
 @main.route('/newcomment/<blog_id>',methods = ["GET","POST"])
 @login_required
