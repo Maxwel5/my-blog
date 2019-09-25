@@ -20,6 +20,10 @@ class User(db.Model,UserMixin):
     email = db.Column(db.String(255),unique = True,index = True)
     role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
     password_hash = db.Column(db.String(255))
+    bio = db.Column(db.String(255))
+    profile_pic_path = db.Column(db.String)
+    post = db.relationship('Post', backref='user', lazy='dynamic')
+    comments = db.relationship('Comment', backref='user', lazy='dynamic')
 
     @property
     def password(self):
